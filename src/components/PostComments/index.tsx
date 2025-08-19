@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import styles from './PostComments.module.css';
 
 import Comment from '../../models/Comment';
+import React from 'react';
 
 const Post = () => {
     const [comments, setComments] = useState<Comment[]>([]);

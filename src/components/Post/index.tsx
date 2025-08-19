@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/alt-text */
 import styles from './Post.module.css';
 
 import PostComments from '../PostComments';
 import { ReactNode } from 'react';
+import React from 'react';
 
 type Props = {
     children: ReactNode;
