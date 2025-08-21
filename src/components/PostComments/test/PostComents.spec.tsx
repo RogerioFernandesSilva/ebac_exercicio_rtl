@@ -1,27 +1,26 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import Post from "..";
-import React from "react";
+/* eslint-disable testing-library/no-render-in-setup */
+import { render, screen, fireEvent } from "@testing-library/react";
+import PostComments from ".."; // This is actually the PostComments component
 
-describe("Testar de Post", () => {
-  test("Deve Adcionar Muito Legal", () => {
-    render(<Post />);
-    fireEvent.change(screen.getByTestId("conentarios"), {
-      target: {
-        value: "Muito Legal",
-      },
-    });
-    fireEvent.click(screen.getByTestId("btn-comentario"));
-
-    expect(screen.getByText("Muito Legal")).toBeInTheDocument();
+describe("Componente PostComments", () => {
+  beforeEach(() => {
+    render(<PostComments />);
   });
-  test("Deve Adcionar Adorei..", () => {
-    render(<Post />);
-    fireEvent.change(screen.getByTestId("conentarios"), {
-      target: {
-        value: "Adorei...",
-      },
+
+  const comentar = (texto: string) => {
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: { value: texto },
     });
-    fireEvent.click(screen.getByTestId("btn-comentario"));
-    expect(screen.getByText("Adorei...")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Comentar" }));
+  };
+
+  test("Adiciona comentário 'Muito Bom'", () => {
+    comentar("Muito Bom");
+    expect(screen.getByText("Muito Bom")).toBeInTheDocument();
+  });
+
+  test("Adiciona comentário 'Tá na hora...'", () => {
+    comentar("Tá na hora...");
+    expect(screen.getByText("Tá na hora...")).toBeInTheDocument();
   });
 });
